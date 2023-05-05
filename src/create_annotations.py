@@ -65,9 +65,9 @@ def create_category_annotation(category_dict):
 
     for key, value in category_dict.items():
         category = {
-            "supercategory": key,
             "id": value,
-            "name": key
+            "name": key,
+            "supercategory": ""
         }
         category_list.append(category)
 
@@ -75,10 +75,14 @@ def create_category_annotation(category_dict):
 
 def create_image_annotation(file_name, width, height, image_id):
     images = {
-        "file_name": file_name,
-        "height": height,
+        "id": image_id,
         "width": width,
-        "id": image_id
+        "height": height,
+        "file_name": file_name,
+        "license": 0,
+        "flickr_url": "",
+        "coco_url": "",
+        "date_captured": 0
     }
 
     return images
