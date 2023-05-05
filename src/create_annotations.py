@@ -6,6 +6,8 @@ import os
 import json
 
 def create_sub_masks(mask_image, width, height):
+    " todo: make code faster"
+
     # Initialize a dictionary of sub-masks indexed by RGB colors
     sub_masks = {}
     for x in range(width):
@@ -89,13 +91,18 @@ def create_annotation_format(polygon, segmentation, image_id, category_id, annot
     area = polygon.area
 
     annotation = {
+        "id": annotation_id,
+        "image_id": image_id,
+        "category_id": category_id,
         "segmentation": segmentation,
         "area": area,
-        "iscrowd": 0,
-        "image_id": image_id,
         "bbox": bbox,
-        "category_id": category_id,
-        "id": annotation_id
+        "iscrowd": 0,
+        "attributes": {
+            "occluded": False,
+            "rotation": 0.0,
+        },
+
     }
 
     return annotation
