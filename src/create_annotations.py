@@ -10,11 +10,13 @@ def create_sub_masks(mask_image, width, height):
 
     # Initialize a dictionary of sub-masks indexed by RGB colors
     sub_masks = {}
+
+
+
     for x in range(width):
         for y in range(height):
             # Get the RGB values of the pixel
             pixel = mask_image.getpixel((x,y))[:3]
-
             # Check to see if we have created a sub-mask...
             pixel_str = str(pixel)
             sub_mask = sub_masks.get(pixel_str)
@@ -29,6 +31,36 @@ def create_sub_masks(mask_image, width, height):
             sub_masks[pixel_str].putpixel((x+1, y+1), 1)
 
     return sub_masks
+
+
+def create_sub_masks_np(mask_image, width, height):
+    " todo: make code faster"
+
+    # Initialize a dictionary of sub-masks indexed by RGB colors
+    sub_masks = {}
+    # convert pil.image to numpy array
+    mask_image_np = np.array(mask_image)
+
+    for x in range(width):
+        for y in range(height):
+            # Get the RGB values of the pixel
+            pixel = mask_image.getpixel((x, y))[:3]
+            pixel_np = (mask_image_np[x, y, 2], mask_image_np[x, y, 2], mask_image_np[x, y, 2])
+            # Check to see if we have created a sub-mask...
+            pixel_str = str(pixel)
+            sub_mask = sub_masks.get(pixel_str)
+            if sub_mask is None:
+                # Create a sub-mask (one bit per pixel) and add to the dictionary
+                # Note: we add 1 pixel of padding in each direction
+                # because the contours module doesn"t handle cases
+                # where pixels bleed to the edge of the image
+                sub_masks[pixel_str] = Image.new("1", (width + 2, height + 2))
+
+            # Set the pixel value to 1 (default is 0), accounting for padding
+            sub_masks[pixel_str].putpixel((x + 1, y + 1), 1)
+
+    return sub_masks
+
 
 def create_sub_mask_annotation(sub_mask):
     # Find contours (boundary lines) around each sub-mask

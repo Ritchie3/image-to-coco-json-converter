@@ -43,65 +43,32 @@ infodict = {"contributor": "Ritchie",
             }
 
 # Label ids of the dataset
-category_ids = {'Dicht + onaanvaardbaar': 0,
-                'Dicht + ernstig': 1,
-                'Dicht + licht': 2,
-                'Open + onaanvaardbaar': 3,
-                'Open + ernstig': 4,
-                'Open + licht': 5,
-                'kettingfout': 6,
-                'garenfout': 7,
-                'plooi': 8}
 
-category_ids = {'Dicht + onaanvaardbaar': 743658,
-                'Dicht + ernstig': 743659,
-                'Dicht + licht': 743660,
-                'Open + onaanvaardbaar': 743661,
-                'Open + ernstig': 743662,
-                'Open + licht': 743663,
-                'kettingfout': 743664,
-                'garenfout': 743665,
-                'plooi': 743666}
-
-
+category_ids = {'Dicht + onaanvaardbaar': 84,
+                'Dicht + ernstig': 85,
+                'Dicht + licht': 86,
+                'Open + onaanvaardbaar': 87,
+                'Open + ernstig': 88,
+                'Open + licht': 89,
+                'kettingfout': 90,
+                'garenfout': 91,
+                'plooi': 92}
 
 # Define which colors match which categories in the images
 category_colors = {
-    "(0, 0, 0)": 0,  # Outlier
-    "(255, 0, 0)": 1,  # Window
-    "(255, 255, 0)": 2,  # Wall
-    "(128, 0, 255)": 3,  # Balcony
-    "(255, 128, 0)": 4,  # Door
-    "(0, 0, 255)": 5,  # Roof
-    "(128, 255, 255)": 6,  # Sky
-    "(0, 255, 0)": 7,  # Shop
-    "(128, 128, 128)": 8  # Chimney
+    "(0, 0, 0)": 84,
+    "(255, 0, 0)": 85,
+    "(255, 255, 0)": 86,
+    "(128, 0, 255)": 87,
+    "(255, 128, 0)": 88,
+    "(0, 0, 255)": 89,
+    "(128, 255, 255)":  90,
+    "(0, 255, 0)":  91,
+    "(128, 128, 128)": 92
 }
 
-category_colors = {
-    "(0, 0, 0)": 743658,
-    "(255, 0, 0)": 743659,
-    "(255, 255, 0)": 743660,
-    "(128, 0, 255)": 743661,
-    "(255, 128, 0)": 743662,
-    "(0, 0, 255)": 743663,
-    "(128, 255, 255)":  743664,
-    "(0, 255, 0)":  743665,
-    "(128, 128, 128)": 743666
-}
-
-"""category_colors = {'(0, 0, 0)': 0,
-                   '(1, 1, 1)': 1,
-                   '(2, 2, 2)': 2,
-                   '(3, 3, 3)': 3,
-                   '(5, 5, 5)': 4,
-                   '(6, 6, 6)': 5,
-                   '(7, 7, 7)': 6,
-                   '(8, 8, 8)': 7,
-                   '(9, 9, 9)': 8}"""
-
-# Define the ids that are a multiplolygon. In our case: wall, roof and sky
-multipolygon_ids = [0,1,2,3,4,5,6,7,8]
+# Define the ids that are a multiplolygon.
+#multipolygon_ids = [0,1,2,3,4,5,6,7,8]
 multipolygon_ids = []
 
 # Get "images" and "annotations" info
@@ -159,7 +126,7 @@ if __name__ == "__main__":
 
 
     if 0:
-        # Get the standard COCO JSON format
+        "in case the data is split up in train/val/test folders:"
         coco_format = get_coco_json_format()
         for keyword in ["train", "val"]:
             mask_path = "dataset/{}_mask/".format(keyword)
@@ -175,7 +142,8 @@ if __name__ == "__main__":
 
             print("Created %d annotations for images in folder: %s" % (annotation_cnt, mask_path))
 
-    if 1:  #whole folder
+    if 1:
+        "in case the data is in one folder:"
         # Get the standard COCO JSON format
         mask_path = r"C:\dataset_inspect40\picanol_sabrina_pro\full_size\masks_png_colorized/"
 
@@ -197,7 +165,8 @@ if __name__ == "__main__":
         print(f"{mask_path}/masks.json")
 
 
-    if 0:  #test portion
+    if 0:
+        "run on the test set with only 1 image:"
 
         mask_path = r"C:\dataset_inspect40\picanol_sabrina_pro\test\masks/"
 
